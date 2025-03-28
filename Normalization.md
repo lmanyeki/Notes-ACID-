@@ -40,3 +40,72 @@ Normalization resolves some of the following issues:
 - Proper implementation of normalization requires expert knowledge of database design and the normalization process.
 
 - Normalization can increase the complexity of a database design, especially if the data model is not well understood or if the normalization process is not carried out correctly.
+
+### Types of normalization
+
+### First Normal Form (1NF)
+
+For a table to be in the 1NF, it must meet the following criteria:
+
+- a single cell must not hold more than one value (atomicity).
+
+- There must be a primary key for identification.
+
+- No duplicated rows or columns.
+
+- Each column must have only one value for each row in the table.
+
+
+|employee_id | name	job_code | job	state_code | home_state |
+|------|------ |------|------- |
+|E001|	Alice|	J01|	Chef|	26|	Michigan|
+|E001|	Alice|	J02	|Waiter|	26|	Michigan|
+|E002|	Bob	|J02|	Waiter	|56|	Wyoming|
+|E002	|Bob|	J03|	Bartender|	56|	Wyoming|
+
+### Second Normal Form (2NF)
+
+The 1NF only eliminates repeating groups, not redundancy.
+
+A table is said to be in 2NF if it meets the following criteria:
+
+-It’s already in 1NF.
+
+- Has no partial dependency, that is, all non-key attributes are fully dependent on a primary key.
+
+employee_roles Table
+
+|employee_id	|job_code|
+|------|------ |
+|E001|	J01|
+|E001|	J02|
+|E002|	J02|
+|E002|	J03|
+
+employees Table
+
+|employee_id	|name|	state_code|	home_state|
+|------|------ |------|------- |
+|E001|	Alice|	26|	Michigan|
+|E002|	Bob	|56	|Wyoming|
+
+### Third Normal Form (3NF)
+
+When a table is in 2NF, it eliminates repeating groups and redundancy, but it does not eliminate transitive partial dependency.
+
+This means a non-prime attribute (an attribute that is not part of the candidate’s key) is dependent on another non-prime attribute. 
+
+employees Table
+
+|employee_id|	name	|state_code|
+|------|------ |
+|E001	|Alice|	26|
+|E002	|Bob	|56|
+|E003	|Alice|	56|
+
+states Table
+
+|state_code	|home_state|
+|------|------ |
+|26|	Michigan|
+|56|	Wyoming|
